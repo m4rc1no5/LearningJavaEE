@@ -25,7 +25,7 @@ public class HelloWorldResourceTest {
 
         //then
         logger.info("Response: {}", response);
-        assertThat(response).contains("Current time:");
+        assertThat(response).contains("Current time: ");
     }
 
 }
