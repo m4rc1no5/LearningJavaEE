@@ -48,7 +48,24 @@
     </dependencies>
 
     <build>
-        <finalName>LearningJavaEE</finalName>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Version>${project.version}</Version>
+                            <dependencies>
+                                org.apache.httpcomponents
+                            </dependencies>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 
     <properties>
