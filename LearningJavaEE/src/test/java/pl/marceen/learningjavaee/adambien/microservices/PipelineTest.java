@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
-import java.util.function.Supplier;
 
 /**
  * @author Marcin Zaremba
@@ -28,8 +27,8 @@ public class PipelineTest {
         CompletableFuture<String> second = CompletableFuture.supplyAsync(this::greetings).thenApplyAsync(this::beautyfy);
 
         first.thenCombine(second, this::combinator)
-            .thenAccept(this::consumeMessage)
-            .thenRun(this::finalAction);
+                .thenAccept(this::consumeMessage)
+                .thenRun(this::finalAction);
     }
 
     @Test
