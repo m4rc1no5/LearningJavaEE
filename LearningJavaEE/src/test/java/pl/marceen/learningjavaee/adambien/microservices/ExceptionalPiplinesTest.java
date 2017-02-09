@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @author Marcin Zaremba
@@ -15,13 +17,14 @@ public class ExceptionalPiplinesTest {
 
     @Before
     public void setUp() throws Exception {
-        System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "10");
+        System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "100");
     }
 
     @Test
     public void forkJoinConfiguration() throws Exception {
-        for (int i = 0; i < 20; i++) {
-            CompletableFuture.runAsync(this::slow);
+        ExecutorService executor = Executors.newCachedThreadPool();
+        for (int i = 0; i < 200; i++) {
+            CompletableFuture.runAsync(this::slow, executor);
         }
 
         Thread.sleep(20000);
@@ -29,7 +32,7 @@ public class ExceptionalPiplinesTest {
 
     private void slow() {
         try {
-            Thread.sleep(5000);
+            Thread.sleep(20000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
