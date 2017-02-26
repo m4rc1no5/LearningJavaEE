@@ -22,10 +22,12 @@ Installation
 
 1. Install docker image wildfly10 from [DockerImages](https://github.com/m4rc1no5/DockerImages)
 2. Build app
+    
     ```bash
     mvn clean install
     ```
 3. Run app on Docker
+    
     ```bash
     cd docker/app
     ./run.sh
@@ -46,10 +48,12 @@ Logs
 ### View logs from WildFly ###
 
 1. Execute an interactive bash shell on the container
+    
     ```bash
     docker exec -it learning_java_ee bash
     ```
 2. View server.log
+    
     ```bash
     less /opt/wildfly-10.1.0.Final/standalone/log/server.log
     ```
