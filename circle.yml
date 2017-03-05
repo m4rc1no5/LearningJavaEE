@@ -5,3 +5,7 @@ machine:
 dependencies:
   override:
     - mvn dependency:resolve -f LearningJavaEE/pom.xml
+
+test:
+  override:
+    - mvn clean install -f LearningJavaEE/pom.xml
