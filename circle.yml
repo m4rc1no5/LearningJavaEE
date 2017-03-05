@@ -4,4 +4,4 @@ machine:
 
 dependencies:
   override:
-    - mvn dependency:resolve
+    - mvn dependency:resolve -f LearningJavaEE/pom.xml
