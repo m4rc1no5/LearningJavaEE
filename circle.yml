@@ -1,4 +1,6 @@
 machine:
+  timezone:
+    Europe/Warsaw
   java:
     version: oraclejdk8
 
@@ -9,3 +11,6 @@ dependencies:
 test:
   override:
     - mvn clean install -f LearningJavaEE/pom.xml
+  post:
+      - mkdir -p $CIRCLE_TEST_REPORTS/junit/
+      - find . -type f -regex ".*/output/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
