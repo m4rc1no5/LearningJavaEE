@@ -19,6 +19,9 @@ public class HelloWorldResourceTest {
     @Rule
     public JAXRSClientProvider provider = JAXRSClientProvider.buildWithURI(Configuration.HELLO_WORLD_CURRENT_TIME_URL);
 
+    @Rule
+    public JAXRSClientProvider processorProvider = JAXRSClientProvider.buildWithURI(Configuration.PROCESSOR_BEAUTIFICATION_URL);
+
     @Test
     public void currentTime() throws Exception {
         logger.info("url: {}", Configuration.HELLO_WORLD_CURRENT_TIME_URL);
@@ -33,7 +36,15 @@ public class HelloWorldResourceTest {
     @Test
     public void currentTimeWithSupplier() throws Exception {
         Supplier<String> messageSupplier = () -> provider.target().request(MediaType.TEXT_PLAIN).get(String.class);
-        CompletableFuture.supplyAsync(messageSupplier).thenAccept(this::consume).get();
+        CompletableFuture.supplyAsync(messageSupplier)
+                .thenApply(this::process)
+                .thenAccept(this::consume)
+                .get();
+    }
+
+    private String process(String input) {
+        Response response = processorProvider.target().request().post(Entity.text(input));
+        return response.readEntity(String.class);
     }
 
     private void consume(String message) {
