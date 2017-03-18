@@ -16,6 +16,11 @@ public class HelloWorldResource {
     @GET
     @Path("currentTime")
     public String currentTime() {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            logger.error(e.getMessage());
+        }
         String msg = String.format("Current time: %s", System.currentTimeMillis());
         logger.info(msg);
 
@@ -25,6 +30,11 @@ public class HelloWorldResource {
     @POST
     @Path("currentTime")
     public void message(String message) {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            logger.error(e.getMessage());
+        }
         logger.info("Message: {}", message);
     }
 
