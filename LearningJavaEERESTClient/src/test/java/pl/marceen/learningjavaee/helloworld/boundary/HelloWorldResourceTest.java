@@ -27,8 +27,8 @@ public class HelloWorldResourceTest {
     @Before
     public void setUp() throws Exception {
         Client client = ClientBuilder.newClient();
-        client.property(ClientProperties.CONNECT_TIMEOUT, 100);
-        client.property(ClientProperties.READ_TIMEOUT, 5000);
+        client.property(ClientProperties.CONNECT_TIMEOUT, 10);
+        client.property(ClientProperties.READ_TIMEOUT, 50);
 
         supplier = client.target(Configuration.HELLO_WORLD_CURRENT_TIME_URL);
         processor = client.target(Configuration.PROCESSOR_BEAUTIFICATION_URL);
@@ -51,8 +51,13 @@ public class HelloWorldResourceTest {
         Supplier<String> messageSupplier = () -> supplier.request(MediaType.TEXT_PLAIN).get(String.class);
         CompletableFuture.supplyAsync(messageSupplier, pool)
                 .thenApply(this::process)
+                .exceptionally(this::handle)
                 .thenAccept(this::consume)
                 .get();
+    }
+
+    private String handle(Throwable t) {
+        return "Sorry - we are overloaded!";
     }
 
     private String process(String input) {
