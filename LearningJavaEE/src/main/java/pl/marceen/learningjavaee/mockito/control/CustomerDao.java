@@ -16,12 +16,14 @@ public class CustomerDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void save(String firstName, String lastName) {
+    public Customer save(String firstName, String lastName) {
         Customer customer = new Customer(firstName, lastName);
         entityManager.persist(customer);
         entityManager.flush();
 
         logger.info("Saved customer with id {}", customer.getId());
+
+        return customer;
     }
 
 }
