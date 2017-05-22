@@ -65,4 +65,4 @@ Logs
 Must read
 ---------
 
-- Hibernate with PostgreSQL – 6 things you need to know(http://www.thoughts-on-java.org/hibernate-postgresql-5-things-need-know/)
+- [Hibernate with PostgreSQL – 6 things you need to know](http://www.thoughts-on-java.org/hibernate-postgresql-5-things-need-know/)
