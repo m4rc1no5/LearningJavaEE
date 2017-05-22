@@ -13,6 +13,7 @@ Table of contents
 1. [Installation](#installation)
 2. [API](#api)
 3. [Logs](#logs)
+4. [Must read](#mustRead)
 
 <a name="installation"></a>
 
@@ -58,3 +59,10 @@ Logs
     ```bash
     less /opt/wildfly-10.1.0.Final/standalone/log/server.log
     ```
+    
+<a name="mustRead"></a>
+
+Must read
+---------
+
+- Hibernate with PostgreSQL – 6 things you need to know(http://www.thoughts-on-java.org/hibernate-postgresql-5-things-need-know/)
